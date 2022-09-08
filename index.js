@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
+const { PtTax } = require("./PtInputLogic");
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -13,8 +13,7 @@ app.use(
 app.use(bodyParser.json());
 
 const calculate = (req, res, next) => {
-  console.log("hi there");
-  next();
+  req.body.tax = PtTax();
 };
 
 app.get("/", (req, res) => {
@@ -25,7 +24,6 @@ app.get("/inputs", (req, res) => {
   res.render("inputs.ejs");
 });
 app.post("/inputs", calculate, (req, res) => {
-  console.log("inside", req.body);
   res.render("home");
 });
 app.get("/inputs/ptinput", (req, res) => {
