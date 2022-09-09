@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 app.set("view engine", "ejs");
+const PtInput = require("./models/PtInput");
+
 app.set("views", path.join(__dirname, "views"));
 const { PtTax } = require("./PtInputLogic");
 app.use(
@@ -12,8 +14,10 @@ app.use(
 );
 app.use(bodyParser.json());
 
-const calculate = (req, res, next) => {
-  req.body.tax = PtTax();
+const calculatePtTax = (req, res, next) => {
+  let { state, salary, gender } = req.body;
+  req.body.tax = PtTax(state, salary, gender);
+  next();
 };
 
 app.get("/", (req, res) => {
@@ -23,12 +27,18 @@ app.get("/", (req, res) => {
 app.get("/inputs", (req, res) => {
   res.render("inputs.ejs");
 });
-app.post("/inputs", calculate, (req, res) => {
-  res.render("home");
+app.post("/inputs", calculatePtTax, async (req, res) => {
+  const selectedState = await PtInput.find({ state: req.body.state });
+  console.log(selectedState);
+  res.render("results", { stateData: req.body });
 });
-app.get("/inputs/ptinput", (req, res) => {
-  res.send("reached");
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Something went wrong";
+  res.send(err.message);
 });
+
 app.listen("3000", () => {
   console.log(`Listening to Port 3000`);
 });

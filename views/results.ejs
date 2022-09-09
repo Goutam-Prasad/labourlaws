@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>result</title>
-  </head>
-  <body></body>
-</html>
+<%-include('layout/boilerplate.ejs') %>
+
+<div><p>Amount to be deducted: <%= stateData.tax %></p></div>
+<div><p>Frequency Of deduction : <%= stateData.frequency %></p></div>
+<div><p>Due Date of Filing : <%= stateData.dueDate %></p></div>
+<div>
+  Official Website Link
+  <a href="<%= stateData.Website %>"><%= stateData.Website %></a>
+</div>
