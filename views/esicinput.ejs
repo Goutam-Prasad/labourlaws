@@ -1,0 +1,16 @@
+<%-include('layout/boilerplate.ejs') %>
+
+<form action="/esicinput" method="POST">
+  <div class="mb-3" style="width: 20%">
+    <label for="esicSalary" class="form-label">Enter Gross Salary</label>
+    <input
+      type="text"
+      class="form-control"
+      id="esic"
+      name="grossSalary"
+      aria-describedby="esic"
+      required
+    />
+  </div>
+  <button>Submit</button>
+</form>

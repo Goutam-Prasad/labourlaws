@@ -1,11 +1,11 @@
 <%-include('layout/boilerplate.ejs') %>
 
 <div>
-  <div><p>Amount to be deducted: <%= stateData[1] %></p></div>
-  <div><p>Frequency Of deduction : <%= stateData[0].frequency %></p></div>
-  <div><p>Due Date of Filing : <%= stateData[0].dueDate %></p></div>
+  <div><p>Amount to be deducted: <%= stateData.tax %></p></div>
+  <div><p>Frequency Of deduction : <%= stateData.frequency %></p></div>
+  <div><p>Due Date of Filing : <%= stateData.dueDate %></p></div>
   <div>
     Official Website Link
-    <a href="<%= stateData[0].Website %>"><%= stateData[0].Website %></a>
+    <a href="<%= stateData.Website %>"><%= stateData.Website %></a>
   </div>
 </div>

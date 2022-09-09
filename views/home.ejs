@@ -1,3 +1,24 @@
 <%-include('layout/boilerplate.ejs') %>
+<style>
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 20vh;
+  }
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+  }
+</style>
 <h1>Welcome</h1>
-<a href="/inputs"><button class="btn btn-primary">PtTax</button></a>
+<div class="main">
+  <a href="/inputs"><button class="btn btn-primary">PtTax</button></a>
+  <a href="/bonusinput"
+    ><button class="btn btn-primary">Statutory Bonus</button></a
+  >
+  <a href="/esicinput"><button class="btn btn-primary">ESIC</button></a>
+</div>

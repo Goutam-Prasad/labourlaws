@@ -39,10 +39,35 @@ app.get("/inputs", (req, res) => {
 
 app.post("/inputs", calculatePtTax, async (req, res) => {
   const selectedState = await PtInput.find({ state: req.body.state });
-  selectedState.push(req.body.tax);
-  res.render("results", { stateData: selectedState });
+  const stateData = selectedState[0];
+  stateData.tax = req.body.tax;
+  res.render("results", { stateData });
 });
 
+//Bonus input Path
+app.get("/bonusinput", (req, res) => {
+  res.render("bonusinput.ejs");
+});
+
+app.post("/bonusinput", (req, res) => {
+  const { basicSalary } = req.body;
+  const bonus = (8.33 / 100) * parseInt(basicSalary);
+  res.render("bonusoutput.ejs", { bonus });
+});
+
+//esic input Path
+app.get("/esicinput", (req, res) => {
+  res.render("esicinput.ejs");
+});
+
+app.post("/esicinput", (req, res) => {
+  const { grossSalary } = req.body;
+  const esicContribution = {
+    employee: parseFloat((0.75 / 100) * parseInt(grossSalary)).toFixed(2),
+    employer: parseFloat((3.25 / 100) * parseInt(grossSalary)).toFixed(2),
+  };
+  res.render("esicoutput", { esicContribution });
+});
 app.listen("3000", () => {
   console.log(`Listening to Port 3000`);
 });
