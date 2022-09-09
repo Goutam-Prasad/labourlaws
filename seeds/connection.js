@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const PtInput = require("../models/PtInput");
-const states = require("./state");
+const states = require("./stateseeds");
 const dbUrl = "mongodb://localhost:27017/test";
 const db = mongoose.connection;
 mongoose.connect(dbUrl);
