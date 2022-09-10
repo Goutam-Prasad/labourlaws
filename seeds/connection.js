@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const PtInput = require("../models/PtInput");
+const State = require("../models/States");
 const states = require("./stateseeds");
+const stateNames = require("./statesnameseeds");
 const dbUrl = "mongodb://localhost:27017/test";
 const db = mongoose.connection;
 mongoose.connect(dbUrl);
@@ -10,9 +12,11 @@ db.once("open", () => {
 });
 
 const stateValuesArray = Object.values(states);
+const statename = Object.values(stateNames);
 // console.log(stateValuesArray);
 const seedsDB = async () => {
   await PtInput.deleteMany({});
+  await State.deleteMany({});
   for (let elem = 0; elem < stateValuesArray.length; elem++) {
     const newEntry = new PtInput({
       state: stateValuesArray[elem].name,
@@ -22,18 +26,18 @@ const seedsDB = async () => {
     });
     await newEntry.save();
   }
-  // const c = new PtInput({
-  //   state: "a",
-  //   frequency: "b",
-  //   dueDate: "12th",
-  //   Website: "ddd.com",
-  // });
-  // await c.save();
+  for (let elem = 0; elem < statename.length; elem++) {
+    const stateNameEntry = new State({
+      name: statename[elem].name,
+    });
+    await stateNameEntry.save();
+  }
 };
 
 seedsDB()
-  .then((result) => {
+  .then(() => {
     db.close();
+    console.log("Database Connection Closed");
   })
   .catch((err) => {
     console.log(err);

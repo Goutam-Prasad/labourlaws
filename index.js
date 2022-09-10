@@ -14,6 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 
 const { PtTax } = require("./PtInputTaxLogic");
 const PtInput = require("./models/PtInput");
+const States = require("./models/States");
 
 //connection
 const db = mongoose.connection;
@@ -67,6 +68,16 @@ app.post("/esicinput", (req, res) => {
     employer: parseFloat((3.25 / 100) * parseInt(grossSalary)).toFixed(2),
   };
   res.render("esicoutput", { esicContribution });
+});
+
+//Minimum Wage Routes
+
+app.get("/minimumwage", async (req, res) => {
+  const stateList = await States.find({});
+  res.render("MinimumWageAct/stateSelection", { stateList });
+});
+app.get("/minimumwage/:statename", (req, res) => {
+  res.send("per state input is stored here");
 });
 app.listen("3000", () => {
   console.log(`Listening to Port 3000`);
