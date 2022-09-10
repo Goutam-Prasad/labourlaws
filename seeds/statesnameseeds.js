@@ -1,5 +1,5 @@
 module.exports = {
-  ap: { name: "AndraPradesh" },
+  ap: { name: "AndhraPradesh" },
 
   ann: { name: "Andaman&Nicobar" },
 

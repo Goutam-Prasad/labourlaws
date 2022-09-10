@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>options for <%-statename%></h1>
+    <form
+      action="/minimumwage/<%-statename%>"
+      method="post"
+      name="options_selected"
+    >
+      <%for(let option in result){%> <% let val=result[option];%>
+      <select name="<%-option%>" id="<%-option%>">
+        <%-option%>
+        <option value="" selected disabled><%-option%></option>
+        <%for(let data of val){%>
+        <option value="<%-data%>"><%-data%></option>
+        <%}%>
+      </select>
+      <%}%>
+      <button>Submit</button>
+    </form>
+  </body>
+</html>
