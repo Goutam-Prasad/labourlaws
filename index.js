@@ -77,7 +77,8 @@ app.get("/minimumwage", async (req, res) => {
   res.render("MinimumWageAct/stateSelection", { stateList });
 });
 app.get("/minimumwage/:statename", (req, res) => {
-  res.send("per state input is stored here");
+  const { statename } = req.params;
+  res.send(`Cilcked on ${statename}`);
 });
 app.listen("3000", () => {
   console.log(`Listening to Port 3000`);
