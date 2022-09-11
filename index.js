@@ -15,8 +15,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(indexRouter);
 //connection
 const db = mongoose.connection;
-const dbUrl =
-  "mongodb+srv://goutam_prasad:Gout%40m1997@cluster0.4xjno.mongodb.net/labourLaws";
+const dbUrl = process.env.MONGO
 
 mongoose.connect(dbUrl);
 db.on("error", console.error.bind(console, "connection error"));
@@ -24,6 +23,6 @@ db.once("open", () => {
   console.log("Database Connected");
 });
 
-app.listen("3000", () => {
-  console.log(`Listening to Port 3000`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Listening to Port ${process.env.PORT}`);
 });
