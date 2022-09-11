@@ -3,8 +3,7 @@ const PtInput = require("../models/PtInput");
 const State = require("../models/States");
 const states = require("./stateseeds");
 const stateNames = require("./statesnameseeds");
-const dbUrl =
-  "mongodb+srv://goutam_prasad:Gout%40m1997@cluster0.4xjno.mongodb.net/labourLaws";
+const dbUrl = process.env.MONGO
 const db = mongoose.connection;
 mongoose.connect(dbUrl);
 db.on("error", console.error.bind(console, "connection error"));
