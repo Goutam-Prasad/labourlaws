@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
 const path = require("path");
+require("dotenv").config()
 const indexRouter = require("./routes");
 app.set("view engine", "ejs");
 app.use(
@@ -24,5 +25,5 @@ db.once("open", () => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`Listening to Port ${process.env.PORT}`);
+  console.log(`Listening to Port ${process.env.PORT || 3000}`);
 });
