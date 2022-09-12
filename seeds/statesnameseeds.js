@@ -66,6 +66,4 @@ module.exports = {
   up: { name: "UttarPradesh" },
 
   wb: { name: "WestBengal" },
-
-  ot: { name: "Others" },
 };
