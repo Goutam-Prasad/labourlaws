@@ -69,7 +69,6 @@ indexRouter.get("/minimumwage", async (req, res) => {
 });
 indexRouter.get("/lwf", async (req, res) => {
   const stateList = await getStatelist();
-  console.log(stateList);
   res.render("lwf/lwfinputoptions.ejs", { stateList });
 });
 
