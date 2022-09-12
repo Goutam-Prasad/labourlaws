@@ -58,7 +58,6 @@ const getDataFromOptions = async (statename, option) => {
 
 //returns
 const sendWageData = async (statename, options) => {
-  console.log(options, statename);
   const res = await mongoose.connection
     .collection(statename)
     .find(options)
