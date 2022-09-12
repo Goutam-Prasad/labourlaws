@@ -115,7 +115,6 @@ const optionHelper = (statename) => {
 };
 //get effective date of the state when the rule was estalished
 const getMinWageRuleEffectiveDate = async (statename) => {
-  console.log("Stastename ", statename);
   const res = await mongoose.connection
     .collection("minwagedate")
     .find({ name: statename })
@@ -141,7 +140,6 @@ const sendWageData = async (statename, options) => {
   }
   delete res[0]._id;
   const result = await getMinWageRuleEffectiveDate(statename);
-  console.log(result);
   res[0]["Effective from Date"] = Object.values(result);
   return res[0];
 };

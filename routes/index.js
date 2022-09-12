@@ -8,6 +8,11 @@ const {
   getDataFromOptions,
   sendWageData,
 } = require("../utils/helper");
+const {
+  getDataFromLwf,
+  optionHelperForLWF,
+  getContributionInLWF,
+} = require("../utils/lwfHelper");
 
 const calculatePtTax = (req, res, next) => {
   let { state, salary, gender } = req.body;
@@ -61,6 +66,35 @@ indexRouter.get("/minimumwage", async (req, res) => {
   const stateList = await States.find({});
   res.render("MinimumWageAct/stateSelection", { stateList });
 });
+indexRouter.get("/lwf", async (req, res) => {
+  const stateList = await States.find({});
+  res.render("lwf/lwfinputoptions.ejs", { stateList });
+});
+
+indexRouter.get("/lwf/:statename", async (req, res) => {
+  const { statename } = req.params;
+  const options = optionHelperForLWF(statename);
+  res.render("lwf/lwfemploymnetType.ejs", { options, statename });
+});
+
+indexRouter.post("/lwf/:statename", async (req, res) => {
+  const { statename } = req.params;
+  const { gross_salary, employement_class, employee_count } = req.body;
+  const result = await getDataFromLwf(statename);
+  const contribution = await getContributionInLWF(
+    statename,
+    gross_salary,
+    employement_class
+  );
+  result["Your Contribution"] = contribution[0];
+  result["Your Employer Contribution"] = contribution[1];
+  res.render("lwf/lwfoutput.ejs", {
+    result,
+    statename,
+    gross_salary,
+    employee_count,
+  });
+});
 
 indexRouter.get("/minimumwage/:statename", async (req, res) => {
   const { statename } = req.params;
@@ -74,7 +108,9 @@ indexRouter.get("/minimumwage/:statename", async (req, res) => {
 
 indexRouter.post("/minimumwage/:statename", async (req, res) => {
   const { statename } = req.params;
+  const { gross_salary } = req.body;
   let result = await sendWageData(statename, req.body);
   res.render("MinimumWageAct/wageoutput.ejs", { result });
 });
+
 module.exports = indexRouter;

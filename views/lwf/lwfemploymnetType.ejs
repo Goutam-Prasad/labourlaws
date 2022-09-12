@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/lwf/<%-statename%>" method="post">
+      <select name="employment_class">
+        <option value="" selected disabled>Select Class of employement</option>
+        <%for(let data=0; data<options.length; data++){%>
+        <option value="<%-options[data]%>"><%=options[data]%></option>
+      
+<%}%>
+</select> 
+<div>
+<label for="gross_salary">enter gross salary</label>
+<input type="text" name="gross_salary">
+<label for="employee_count">Enter number of employee in Organisation</label>
+<input type="text" name="employee_count">
+</div>
+      <button>Submit</button>
+    </form>
+  </body>
+</html>
