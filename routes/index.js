@@ -12,6 +12,7 @@ const {
   getDataFromLwf,
   optionHelperForLWF,
   getContributionInLWF,
+  getStatelist,
 } = require("../utils/lwfHelper");
 
 const calculatePtTax = (req, res, next) => {
@@ -67,7 +68,8 @@ indexRouter.get("/minimumwage", async (req, res) => {
   res.render("MinimumWageAct/stateSelection", { stateList });
 });
 indexRouter.get("/lwf", async (req, res) => {
-  const stateList = await States.find({});
+  const stateList = await getStatelist();
+  console.log(stateList);
   res.render("lwf/lwfinputoptions.ejs", { stateList });
 });
 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const {
   ANDRA,
   CHANDIGARH,
@@ -55,6 +56,14 @@ const optionHelperForLWF = (statename) => {
       return OTHERS;
   }
 };
+const getStatelist = async () => {
+  const list = await mongoose.connection
+    .collection("LWFStatesName")
+    .find({})
+    .toArray();
+  list.forEach((item) => delete item._id);
+  return list;
+};
 
 const getDataFromLwf = async (statename) => {
   const res = await mongoose.connection
@@ -91,4 +100,5 @@ module.exports = {
   getDataFromLwf,
   optionHelperForLWF,
   getContributionInLWF,
+  getStatelist,
 };
