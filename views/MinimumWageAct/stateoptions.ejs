@@ -24,5 +24,12 @@
       <%}%>
       <button>Submit</button>
     </form>
+    <a href="/minimumwage"><button>Back</button></a>
+    <a href="/"><button>Home</button></a>
   </body>
+  <% if(locals.minwageResult!=0){%>
+  <h1>Output</h1>
+  <%for(let field in minwageResult){%>
+  <p><b><%-field %></b> : <%-minwageResult[field]%></p>
+  <%}%> <%}%>
 </html>

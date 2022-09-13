@@ -1,7 +1,9 @@
+<%-include('../layout/boilerplate.ejs') %>
 <div>
   <%for(let state of stateList){%>
-  <a href="/minimumwage/<%=state.name%>"
-    ><button class="btn btn-primary"><%=state.name%></button></a
-  >
+  <a href="/minimumwage/<%=state.name%>"><button><%=state.name%></button></a>
   <%}%>
+  <div>
+    <a href="/"><button class="btn btn-primary">Home/Back</button></a>
+  </div>
 </div>

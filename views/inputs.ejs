@@ -5,7 +5,7 @@
   <div class="main">
     <div class="PTinputs">
       <select name="state">
-        <option value="" selected disabled>Select Class of Employment</option>
+        <option value="" selected disabled>Select state</option>
         <option value="AndraPradesh">Andra Pradesh</option>
         <option value="Assam">Assam</option>
         <option value="Bihar">Bihar</option>
@@ -45,5 +45,20 @@
       </div>
     </div>
   </div>
-  <button>Submit</button>
 </form>
+  <button class="btn btn-success">Submit</button>
+<a href="/"><button class="btn btn-danger">Back</button></a>
+
+<div>
+<%if(locals.sData!=0){%>
+<div>
+  <div><p>Amount to be deducted: <%= sData.tax %></p></div>
+  <div><p>Frequency Of deduction : <%= sData.frequency %></p></div>
+  <div><p>Due Date of Filing : <%= sData.dueDate %></p></div>
+  <div>
+    Official Website Link
+    <a href="<%= sData.Website %>"><%= sData.Website %></a>
+  </div>
+</div>
+<%}%>
+</div>

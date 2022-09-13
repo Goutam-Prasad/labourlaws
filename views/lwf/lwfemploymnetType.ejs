@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+<%-include('../layout/boilerplate.ejs') %>
+
   <style>
   body{
     display: flex;
@@ -34,10 +28,27 @@
 <br>
 </div>
 <div>
-      <button>Submit</button>
-      <button>Back</button>
-      <button>Home</button>
-      </div>
+  <button class="btn btn-success">Submit</button>
+    </div>
     </form>
+    <div>
+      <a href="/lwf"><button class="btn btn-secondary">Back</button></a>
+     <a href="/"><button class="btn btn-danger">Home</button></a>
+     </div>
+    <!--Output Section-->
+
+    <%if(locals.lwfResult!=0){%>
+     <div style="height:20vh">
+      <h1>Output</h1>
+      <p><b> Input Gross Salary </b> : <%-g_Salary%></p>
+      <%for(let data in lwfResult){%> <%if(data!=="Link"){%>
+      <p><b><%-data%>: </b><%-lwfResult[data]%></p>
+      <%}else {%>
+      <p>
+        Link
+        <a href="<%-lwfResult[data]%>"><%-lwfResult[data]%></a>
+      </p>
+      <%}%> <%}%>
+      <%}%>
   </body>
 </html>

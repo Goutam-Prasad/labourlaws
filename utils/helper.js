@@ -1,9 +1,3 @@
-/**
- * 
- * @param {*} statename 
- returns [...options per state]
- */
-
 const { mongoose } = require("mongoose");
 const {
   ANDHRA_PRADESH_OPTIONS,
@@ -41,6 +35,11 @@ const {
   MANIPUR_OPTIONS,
 } = require("./constants");
 
+/**
+ * 
+ * @param {*} statename 
+ returns [...options per state]
+ */
 const optionHelper = (statename) => {
   switch (statename) {
     case "AndhraPradesh":
@@ -113,7 +112,12 @@ const optionHelper = (statename) => {
       return [];
   }
 };
-//get effective date of the state when the rule was estalished
+
+/**
+ *
+ * @param {*} statename
+ * @returns {date of rule establishment}
+ */
 const getMinWageRuleEffectiveDate = async (statename) => {
   const res = await mongoose.connection
     .collection("minwagedate")
@@ -123,13 +127,24 @@ const getMinWageRuleEffectiveDate = async (statename) => {
   delete res[0].name;
   return res[0];
 };
-// return options according to the field
+
+/**
+ *
+ * @param {*} statename
+ * @param {*} option
+ * @returns [.... different options available for each state]
+ */
 const getDataFromOptions = async (statename, option) => {
   const res = await mongoose.connection.collection(statename).distinct(option);
   return res;
 };
 
-//returns wage details of the entered state
+/**
+ *
+ * @param {*} statename
+ * @param {*} options
+ * @returns {details of wage of per state}
+ */
 const sendWageData = async (statename, options) => {
   const res = await mongoose.connection
     .collection(statename)
