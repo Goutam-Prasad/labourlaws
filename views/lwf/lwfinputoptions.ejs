@@ -7,6 +7,14 @@
     <title>Document</title>
   </head>
   <body>
+    <style>
+      div {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
+    </style>
+    <h1>Select State</h1>
     <div>
       <%for(let state of stateList){%>
       <a href="/lwf/<%=state.name%>"
@@ -20,7 +28,5 @@
       >
       <%}%>
     </div>
-
-    <button>Submit</button>
   </body>
 </html>

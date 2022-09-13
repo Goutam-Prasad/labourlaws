@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { lwfemployeeContributionHelper } = require("./lwfcontributionfunctn");
 
 const {
   ANDRA,
@@ -17,6 +18,12 @@ const {
   WESTBENGAL,
   OTHERS,
 } = require("./lwfConstants");
+
+/**
+ *
+ * @param {*} statename
+ * @returns options for lwf i.e returns selection of class of employment for thr given state
+ */
 
 const optionHelperForLWF = (statename) => {
   switch (statename) {
@@ -56,6 +63,12 @@ const optionHelperForLWF = (statename) => {
       return OTHERS;
   }
 };
+
+/**
+ *
+ * @returns [...list of states whre lwf rules are applicable]
+ */
+
 const getStatelist = async () => {
   const list = await mongoose.connection
     .collection("LWFStatesName")
@@ -65,6 +78,12 @@ const getStatelist = async () => {
   return list;
 };
 
+/**
+ *
+ * @param {*} statename
+ * @returns {...all Lwf data for a particular state}
+ */
+
 const getDataFromLwf = async (statename) => {
   const res = await mongoose.connection
     .collection("LWF_Data")
@@ -73,27 +92,64 @@ const getDataFromLwf = async (statename) => {
   delete res[0]._id;
   delete res[0].minEmployee;
   delete res[0].name;
+  delete res[0].categoryConstrain;
   return res[0];
 };
-//return contribution of an employee
+
+/**
+ *
+ * @param {*} statename
+ * @param {*} gross_salary
+ * @param {*} employment_class
+ * @param {*} employee_count
+ * @returns [contribution of employee and employer ]
+ */
+
 const getContributionInLWF = async (
   statename,
   gross_salary,
-  employment_class
+  employment_class,
+  employee_count
 ) => {
   const res = await mongoose.connection
     .collection("LWF_Data")
     .find({ name: statename })
     .toArray();
-  console.log(res[0]);
-  const { employeeContribution, employerContribution } = res[0];
-  const yourContribution = (
-    (parseFloat(employeeContribution) / 100) *
-    gross_salary
-  ).toFixed(2);
-  const yourEmployerContribution = (
-    parseFloat(employerContribution / 100) * gross_salary
-  ).toFixed(2);
+
+  const {
+    employeeContribution,
+    employerContribution,
+    minEmployee,
+    categoryConstrain,
+  } = res[0]; //destructuring from the result got from database
+  let yourContribution = 0;
+  let yourEmployerContribution = 0;
+  if (
+    parseInt(employee_count) > parseInt(minEmployee) &&
+    categoryConstrain.includes(employment_class)
+  ) {
+    yourContribution = lwfemployeeContributionHelper(
+      statename,
+      employeeContribution,
+      gross_salary
+    );
+    if (statename == "Maharastra") {
+      if (parseInt(gross_salary) > 3000) {
+        yourEmployerContribution = (
+          parseFloat(employerContribution[1] / 100) * gross_salary
+        ).toFixed(2);
+      } else {
+        yourEmployerContribution = (
+          parseFloat(employerContribution[1] / 100) * gross_salary
+        ).toFixed(2);
+      }
+    } else {
+      yourEmployerContribution = (
+        parseFloat(employerContribution / 100) * gross_salary
+      ).toFixed(2);
+    }
+  }
+
   return [yourContribution, yourEmployerContribution];
 };
 module.exports = {

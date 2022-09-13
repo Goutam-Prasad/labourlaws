@@ -7,10 +7,26 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Output</h1>
-    <p><b> Input Gross Salary </b> : <%-gross_salary%></p>
-    <%for(let data in result){%>
-    <p><b><%-data%>: </b><%-result[data]%></p>
-    <%}%>
+    <style>
+      div {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <div>
+      <h1>Output</h1>
+      <p><b> Input Gross Salary </b> : <%-gross_salary%></p>
+      <%for(let data in result){%> <%if(data!=="Link"){%>
+      <p><b><%-data%>: </b><%-result[data]%></p>
+      <%}else {%>
+      <p>
+        Link
+        <a href="<%-result[data]%>"><%-result[data]%></a>
+      </p>
+      <%}%> <%}%>
+    </div>
   </body>
 </html>

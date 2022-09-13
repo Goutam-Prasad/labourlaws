@@ -34,7 +34,6 @@ const KERELA = ["Everyone"];
 const PUNJAB = ["Everyone"];
 const KARNATAKA = ["Everyone"];
 const OTHERS = ["Rules not applicable in this state"];
-
 module.exports = {
   ANDRA,
   CHANDIGARH,

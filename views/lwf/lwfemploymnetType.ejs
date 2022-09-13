@@ -6,22 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <style>
+  body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+  </style>
   <body>
+  <h1>Enter Details</h1>
     <form action="/lwf/<%-statename%>" method="post">
       <select name="employment_class">
         <option value="" selected disabled>Select Class of employement</option>
         <%for(let data=0; data<options.length; data++){%>
-        <option value="<%-options[data]%>"><%=options[data]%></option>
+        <option value="<%-options[data]%>" ><%=options[data]%></option>
       
 <%}%>
 </select> 
 <div>
-<label for="gross_salary">enter gross salary</label>
-<input type="text" name="gross_salary">
-<label for="employee_count">Enter number of employee in Organisation</label>
-<input type="text" name="employee_count">
+<label for="gross_salary"> <b> Enter gross salary </b> </label>
+<input type="text" name="gross_salary" required>
+<br>
+<label for="employee_count"> <b> Enter number of employee in Organisation </b></label>
+<input type="text" name="employee_count" required>
+<br>
 </div>
+<div>
       <button>Submit</button>
+      <button>Back</button>
+      <button>Home</button>
+      </div>
     </form>
   </body>
 </html>

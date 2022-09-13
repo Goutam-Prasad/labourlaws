@@ -67,6 +67,7 @@ indexRouter.get("/minimumwage", async (req, res) => {
   const stateList = await States.find({});
   res.render("MinimumWageAct/stateSelection", { stateList });
 });
+
 indexRouter.get("/lwf", async (req, res) => {
   const stateList = await getStatelist();
   res.render("lwf/lwfinputoptions.ejs", { stateList });
@@ -80,12 +81,13 @@ indexRouter.get("/lwf/:statename", async (req, res) => {
 
 indexRouter.post("/lwf/:statename", async (req, res) => {
   const { statename } = req.params;
-  const { gross_salary, employement_class, employee_count } = req.body;
+  const { gross_salary, employment_class, employee_count } = req.body;
   const result = await getDataFromLwf(statename);
   const contribution = await getContributionInLWF(
     statename,
     gross_salary,
-    employement_class
+    employment_class,
+    employee_count
   );
   result["Your Contribution"] = contribution[0];
   result["Your Employer Contribution"] = contribution[1];

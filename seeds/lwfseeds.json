@@ -12,6 +12,7 @@
       "Any Establishment/Employer employing 1 or more persons",
       "All employees except employees working in part-time position,apprentice and managerial position"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "http://labour.ap.gov.in/ELabour/Views/RecentAmendementNewActs.aspx"
   },
   {
@@ -27,8 +28,10 @@
       "Any Establishment/Employer employing 1 or more persons",
       "All employees except in managerial/administrative/supervisory capacity drawing wages more than ₹ 10,000 per month"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "http://cglabour.nic.in/ShramKalyanMandal/abhidayrashi.aspx"
   },
+
   {
     "name": "Chandigarh",
     "frequency": "Monthly",
@@ -41,7 +44,9 @@
     "rules": [
       "Any Establishment/Employer employing 1 or more persons",
       "All employees who are drawing salary upto ₹ 15,000 per month"
-    ]
+    ],
+    "categoryConstrain": ["NA"],
+    "Link": "http://chandigarh.gov.in/dept_labour.htm"
   },
   {
     "name": "Delhi",
@@ -56,6 +61,7 @@
       "Any Establishment employing 5 or more persons",
       "All employees except in managerial/administrative/supervisory capacity drawing wages more than ₹ 2,500 per month"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "http://www.delhi.gov.in/wps/wcm/connect/DOIT_Labour/labour/notification/labour+welfare+funds"
   },
   {
@@ -70,6 +76,7 @@
       "Any Establishment/Employer employing 1 or more persons",
       "All employees except in managerial/administrative/supervisory capacity drawing wages more than ₹ 1,600 per month"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "http://labour.goa.gov.in/index.php/goa-lwb/"
   },
   {
@@ -85,6 +92,7 @@
       "Any Establishment/Employer employing 10 or more persons",
       "All employees except in managerial/supervisory capacity drawing wages more than ₹ 3,500 per month"
     ],
+    "categoryConstrain": ["Others", "Administrative"],
     "Link": "https://glwb.gujarat.gov.in/"
   },
   {
@@ -100,6 +108,7 @@
       "Any Establishment/Employer employing 10 or more persons",
       "All employees employed,directly by or through any agency,including a contractor for remuneration in any Factory/Est"
     ],
+    "categoryConstrain": ["Everyone"],
     "Link": "https://hrylabour.gov.in/content/cms/MTU"
   },
   {
@@ -115,6 +124,7 @@
       "Any Establishment/Employer employing 50 or more persons",
       "All employees who are employed for wages to do any work skilled/unskilled/manual/clerical,in an establishment"
     ],
+    "categoryConstrain": ["Everyone"],
     "Link": "http://labour.kar.nic.in/labour/klwboard.htm"
   },
   {
@@ -130,6 +140,7 @@
       "Any Establishment/Employer employing 1 or more persons",
       "All employees under the purview of the Kerala Labour Welfare Fund Act, 1975. For Shops & Establishments under the purview of The Kerala Shops And Commercial Establishments Workers Welfare Fund Act,2006,Employee and Employer has to contribute ₹ 20 each, every month by 30 th and due date is 5 th of every month."
     ],
+    "categoryConstrain": ["Everyone"],
     "Link": "http://peedika.kerala.gov.in/"
   },
   {
@@ -145,6 +156,7 @@
       "Any Establishment/Employer employing 1 or more persons",
       "All employees except employees in managerial/supervisory capacity drawing wages more than ₹ 10,000 per month"
     ],
+    "categoryConstrain": ["Administrative", "Others"],
     "Link": "http://shramsewa.mp.gov.in/labourwelfareboard/en-us/"
   },
   {
@@ -160,6 +172,7 @@
       "Any Establishment/Employer employing 5 or more persons",
       "All employees except in managerial/supervisory capacity. Contributions vary based on wage upto ₹ 3,000 and above ₹ 3,000 per month"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "https://mahakamgar.maharashtra.gov.in/index.htm"
   },
   {
@@ -175,6 +188,7 @@
       "Any Establishment/Employer employing 20 or more persons",
       "All employees except employees working in part-time position,apprentice and managerial position"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "http://www.labdirodisha.gov.in"
   },
   {
@@ -190,6 +204,7 @@
       "Any Establishment/Employer employing 20 or more persons",
       "All employees employed for hire/reward to do any work,skilled/unskilled,manual/clerical,in an establishment"
     ],
+    "categoryConstrain": ["Everyone"],
     "Link": "http://pblabour.gov.in/"
   },
   {
@@ -205,6 +220,7 @@
       "Any Establishment/Employer employing 5 or more persons",
       "All employees except those in part-time,apprentice,managerial positions drawing wages more than ₹ 15,000 per month"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "https://www.lwb.tn.gov.in/"
   },
   {
@@ -220,6 +236,7 @@
       "Any Establishment/Employer employing 20 or more persons",
       "All employees except employees in managerial/supervisory capacity drawing wages more than ₹ 1,600 per month"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "https://labour.telangana.gov.in/AboutUs.do"
   },
   {
@@ -234,6 +251,7 @@
       "Any Establishment/Employer employing 10 or more persons",
       "All employees except employees in managerial/supervisory capacity drawing wages more than ₹ 1,600 per month"
     ],
+    "categoryConstrain": ["Others"],
     "Link": "http://www.wblwb.org/html/index.php"
   }
 ]
