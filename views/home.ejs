@@ -10,7 +10,7 @@
     <input type="checkbox" name="bonusinput" id="bonusinput" />
     <label for="bonusinput">Bonus</label>
   </div>
-   <div>
+  <div>
     <input type="checkbox" name="esic" id="esic" />
     <label for="esic">Esic</label>
   </div>
@@ -22,7 +22,8 @@
     <input type="checkbox" name="lwf" id="lwf" /> <label for="lwf">Lwf</label>
   </div>
   <button class="btn btn-success">Submit</button>
-  <button name="reset" class="btn btn-danger">Reset</button><!--this button is name reset so that the form can reset as it name will be passed in req.body-->
+  <button name="reset" class="btn btn-danger">Reset</button
+  ><!--this button is name reset so that the form can reset as it name will be passed in req.body-->
 </form>
 
 <!-- <div class="main">
@@ -39,11 +40,11 @@
 
 <!-------------------------------------- Pages to show option------------------------------------------------------------- -->
 <%if(locals.showPtTaxPage!=0){%>
-<form action="/inputs" method="POST">
+<form action="/outputs" method="POST">
   <h1 align="center">PtInputs</h1>
   <div class="main">
     <div class="PTinputs">
-      <select name="state">
+      <select name="Ptstate" required>
         <option value="" selected disabled>Select state</option>
         <option value="AndraPradesh">Andra Pradesh</option>
         <option value="Assam">Assam</option>
@@ -66,103 +67,97 @@
       </select>
     </div>
     <div class="salary">
-      <select name="salarytype">
+      <select name="salarytype" requried>
         <option value="" selected disabled>Salary</option>
         <option value="annual">Annual</option>
         <option value="monthly">monthly</option>
       </select>
-      <div>
-        <div class="gender">
-      <select name="gender">
+    </div>
+    <div class="gender">
+      <select name="gender" required>
         <option value="" selected disabled>gender</option>
         <option value="m">Male</option>
         <option value="f">Female</option>
       </select>
-      <div>
-        <label for="salary">Enter salary</label>
-        <input type="text" name="salary" id="salary" required />
-      </div>
+    </div>
+    <div>
+      <label for="salary">Enter salary</label>
+      <input type="text" name="salary" id="salary" required />
     </div>
   </div>
-</form>
-  <button class="btn btn-success">Submit</button>
-<a href="/"><button class="btn btn-danger">Back</button></a>
 
-<div>
-<%if(locals.sData!=0){%>
-<div>
-  <div><p>Amount to be deducted: <%= sData.tax %></p></div>
-  <div><p>Frequency Of deduction : <%= sData.frequency %></p></div>
-  <div><p>Due Date of Filing : <%= sData.dueDate %></p></div>
   <div>
-    Official Website Link
-    <a href="<%= sData.Website %>"><%= sData.Website %></a>
+    <%if(locals.sData!=0){%>
+    <div>
+      <div><p>Amount to be deducted: <%= sData.tax %></p></div>
+      <div><p>Frequency Of deduction : <%= sData.frequency %></p></div>
+      <div><p>Due Date of Filing : <%= sData.dueDate %></p></div>
+      <div>
+        Official Website Link
+        <a href="<%= sData.Website %>"><%= sData.Website %></a>
+      </div>
+    </div>
+    <%}%>
   </div>
-</div>
-<%}%>
-</div>
-<%}%>
-
-
-<!----------------------------------------------------Bonus I/O Section--------------------------------------------------------->
-<div>
-<%if(locals.showBonusInputPage!=0){%>
-<form action="/bonusinput" method="POST">
-  <div class="mb-3" style="width: 20%">
-    <label for="basicSalary" class="form-label">Enter Basic Salary</label>
-    <input
-      type="text"
-      class="form-control"
-      id="basicSalary"
-      name="basicSalary"
-      aria-describedby="basicSalary"
-      required
-    />
-  </div>
-  <button class="btn btn-success">Submit</button>
-</form>
-
-<a href="/"><button class="btn btn-danger">Back</button></a>
-
-<div>
-  <%if(locals.bonusData){%>
-  <div>Output</div>
-  <div><p>Bonus is <%-bonusData%></p></div>
   <%}%>
-</div>
-<%}%>
-</div>
 
-<!----------------------------------------Esic Section-------------------------------------------------------------------------->
-<%if(locals.showEsicPage!=0){%>
-<form action="/esicinput" method="POST">
+  <!----------------------------------------------------Bonus I/O Section--------------------------------------------------------->
+  <div>
+    <%if(locals.showBonusInputPage!=0){%>
+    <h1 align="center">Bonus Input</h1>
+    <div class="mb-3" style="width: 20%">
+      <label for="basicSalary" class="form-label">Enter Basic Salary</label>
+      <input
+        type="text"
+        class="form-control"
+        id="basicSalary"
+        name="basicSalary"
+        aria-describedby="basicSalary"
+        required
+      />
+    </div>
+
+    <div>
+      <%if(locals.bonusData){%>
+      <div>Output</div>
+      <div><p>Bonus is <%-bonusData%></p></div>
+      <%}%>
+    </div>
+    <%}%>
+  </div>
+
+  <!----------------------------------------Esic Section-------------------------------------------------------------------------->
+  <%if(locals.showEsicPage!=0){%>
+  <h1 align="center">Esic Input</h1>
   <div class="mb-3" style="width: 20%">
-    <label for="esic" class="form-label">Enter Gross Salary</label>
+    <label for="esicInput" class="form-label">Enter Gross Salary</label>
     <input
       type="text"
       class="form-control"
-      id="esic"
-      name="grossSalary"
+      id="esicInput"
+      name="esicInput"
       aria-describedby="esic"
       required
     />
   </div>
+
+  <a href="/"><button class="btn btn-danger">Back</button></a>
+  <div></div>
+  <%if(locals.esicContri!=0){%>
+  <div>
+    <div><P>Esic Contribution</P></div>
+    <div><p>Employee Contribution is : <%-esicContri.employee%></p></div>
+    <div><p>Employer Contribution is : <%-esicContri.employer%></p></div>
+  </div>
+  <%}%>
+  </div>
+   <%}%>
   <button class="btn btn-success">Submit</button>
 </form>
 
-<a href="/"><button class="btn btn-danger">Back</button></a>
-<%if(locals.esicContri!=0){%>
-<div>
-  <div><P>Esic Contribution</P></div>
-  <div><p>Employee Contribution is : <%-esicContri.employee%></p></div>
-  <div><p>Employer Contribution is : <%-esicContri.employer%></p></div>
-</div>
-<%}%>
-<%}%>
-
-
 <!-------------------------------------minimum wage section---------------------------------------------------------------------->
 <%if(locals.showMinWagePageStateList!=0){%>
+<h1 align="center">Select State for Minimum Wage</h1>
 <div>
   <%for(let state of sListMinWageAct){%>
   <a href="/minimumwage/<%=state.name%>"><button><%=state.name%></button></a>
@@ -174,21 +169,17 @@
 <%}%>
 <!-----------------------------------------------Lwf Section-------------------------------------------------------------------->
 <%if(locals.showLwfPageStateList!=0){%>
-  <h1>Select State</h1>
-    <div>
-      <%for(let state of slistLwf){%>
-      <a href="/lwf/<%=state.name%>"
-        ><button
-
-          name="statename"
-          value="<%=state.name%>"
-        >
-          <%=state.name%>
-        </button></a
-      >
-      <%}%>
-    </div>
-    <div>
-    <a href="/"><button class="btn btn-danger">Home/Back</button></a>
-    </div>
+<h1 align="center">Select State for Lwf</h1>
+<div>
+  <%for(let state of slistLwf){%>
+  <a href="/lwf/<%=state.name%>"
+    ><button name="statename" value="<%=state.name%>">
+      <%=state.name%>
+    </button></a
+  >
+  <%}%>
+</div>
+<div>
+  <a href="/"><button class="btn btn-danger">Home/Back</button></a>
+</div>
 <%}%>

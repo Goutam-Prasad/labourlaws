@@ -53,7 +53,7 @@ let showLwfPageStateList = 0;
 let showLwfPage = 0;
 
 indexRouter.get("/", (req, res) => {
-  // console.log("inside get ", slistLwf);
+  // console.log("inside get ", sData);
   res.render("home", {
     showPtTaxPage,
     sData,
@@ -69,8 +69,11 @@ indexRouter.get("/", (req, res) => {
 
   //these are used to reset locals so as upon re rendering the page gets empty
   showPtTaxPage = 0;
+  sData = 0; //pt input section
   showBonusInputPage = 0;
+  bonusData = 0; //bonusdata section
   showEsicPage = 0;
+  esicContri = 0;
   showMinWagePageStateList = 0;
   showLwfPageStateList = 0;
 });
@@ -105,17 +108,42 @@ indexRouter.post("/", async (req, res) => {
   res.redirect(301, "/");
 });
 
+indexRouter.post("/outputs", calculatePtTax, async (req, res) => {
+  const { Ptstate, basicSalary, esicInput } = req.body;
+  if (Ptstate) {
+    const selectedState = await PtInput.find({ state: req.body.Ptstate });
+    const stateData = selectedState[0];
+    stateData.tax = req.body.tax;
+    sData = stateData;
+    showPtTaxPage = 1;
+  }
+  if (basicSalary) {
+    const bonus = (8.33 / 100) * parseInt(basicSalary);
+    bonusData = bonus;
+    showBonusInputPage = 1;
+  }
+  if (esicInput) {
+    const esicContribution = {
+      employee: parseFloat((0.75 / 100) * parseInt(esicInput)).toFixed(2),
+      employer: parseFloat((3.25 / 100) * parseInt(esicInput)).toFixed(2),
+    };
+    esicContri = esicContribution;
+    showEsicPage = 1;
+  }
+  res.redirect(301, "/");
+});
 indexRouter.get("/inputs", (req, res) => {
   res.render("inputs.ejs", { sData });
   sData = 0;
 });
 
 indexRouter.post("/inputs", calculatePtTax, async (req, res) => {
+  showPtTaxPage = 1;
   const selectedState = await PtInput.find({ state: req.body.state });
   const stateData = selectedState[0];
   stateData.tax = req.body.tax;
   sData = stateData;
-  res.redirect(301, "/inputs");
+  res.redirect(301, "/");
   // res.render("results", { stateData });
 });
 
@@ -130,7 +158,8 @@ indexRouter.post("/bonusinput", (req, res) => {
   const { basicSalary } = req.body;
   const bonus = (8.33 / 100) * parseInt(basicSalary);
   bonusData = bonus;
-  res.redirect(301, "/bonusinput");
+  showBonusInputPage = 1;
+  res.redirect(301, "/");
   //res.render("bonusoutput.ejs", { bonus });
 });
 
