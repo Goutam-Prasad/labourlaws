@@ -41,14 +41,19 @@ let sName = 0; //statename
 let g_Salary = 0; //gross_salary
 let emp_Count = 0; //employee_count
 
+//Variable used for single page routing
+let sListMinWageAct = 0;
+let slistLwf = 0;
 //locals for showing pages
 let showPtTaxPage = 0;
 let showBonusInputPage = 0;
 let showEsicPage = 0;
-let showMinWagePage = 0;
+let showMinWagePageStateList = 0;
+let showLwfPageStateList = 0;
 let showLwfPage = 0;
 
 indexRouter.get("/", (req, res) => {
+  // console.log("inside get ", slistLwf);
   res.render("home", {
     showPtTaxPage,
     sData,
@@ -56,13 +61,21 @@ indexRouter.get("/", (req, res) => {
     showBonusInputPage,
     showEsicPage,
     esicContri,
+    showMinWagePageStateList,
+    sListMinWageAct,
+    showLwfPageStateList,
+    slistLwf,
   });
+
+  //these are used to reset locals so as upon re rendering the page gets empty
   showPtTaxPage = 0;
   showBonusInputPage = 0;
   showEsicPage = 0;
+  showMinWagePageStateList = 0;
+  showLwfPageStateList = 0;
 });
 
-indexRouter.post("/", (req, res) => {
+indexRouter.post("/", async (req, res) => {
   const pages = Object.keys(req.body);
   if (pages.includes("reset")) {
     showPtTaxPage = 0;
@@ -81,10 +94,12 @@ indexRouter.post("/", (req, res) => {
       showEsicPage = 1;
     }
     if (pages.includes("minimumwage")) {
-      showMinWagePage = 1;
+      sListMinWageAct = await States.find({});
+      showMinWagePageStateList = 1;
     }
     if (pages.includes("lwf")) {
-      showLwfPage = 1;
+      slistLwf = await getStatelist();
+      showLwfPageStateList = 1;
     }
   }
   res.redirect(301, "/");
@@ -141,8 +156,8 @@ indexRouter.post("/esicinput", (req, res) => {
 
 indexRouter.get("/minimumwage", async (req, res) => {
   const stateList = await States.find({});
-  res.re;
-  res.render("MinimumWageAct/stateSelection", { stateList });
+  res.redirect(301, "/");
+  // res.render("MinimumWageAct/stateSelection", { stateList });
 });
 
 indexRouter.get("/lwf", async (req, res) => {

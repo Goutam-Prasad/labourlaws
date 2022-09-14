@@ -134,7 +134,7 @@
 </div>
 
 <!----------------------------------------Esic Section-------------------------------------------------------------------------->
-<%if(locals.showEsicPage){%>
+<%if(locals.showEsicPage!=0){%>
 <form action="/esicinput" method="POST">
   <div class="mb-3" style="width: 20%">
     <label for="esic" class="form-label">Enter Gross Salary</label>
@@ -162,3 +162,33 @@
 
 
 <!-------------------------------------minimum wage section---------------------------------------------------------------------->
+<%if(locals.showMinWagePageStateList!=0){%>
+<div>
+  <%for(let state of sListMinWageAct){%>
+  <a href="/minimumwage/<%=state.name%>"><button><%=state.name%></button></a>
+  <%}%>
+  <div>
+    <a href="/"><button class="btn btn-primary">Home/Back</button></a>
+  </div>
+</div>
+<%}%>
+<!-----------------------------------------------Lwf Section-------------------------------------------------------------------->
+<%if(locals.showLwfPageStateList!=0){%>
+  <h1>Select State</h1>
+    <div>
+      <%for(let state of slistLwf){%>
+      <a href="/lwf/<%=state.name%>"
+        ><button
+
+          name="statename"
+          value="<%=state.name%>"
+        >
+          <%=state.name%>
+        </button></a
+      >
+      <%}%>
+    </div>
+    <div>
+    <a href="/"><button class="btn btn-danger">Home/Back</button></a>
+    </div>
+<%}%>
