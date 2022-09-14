@@ -43,13 +43,49 @@ let emp_Count = 0; //employee_count
 
 //locals for showing pages
 let showPtTaxPage = 0;
+let showBonusInputPage = 0;
+let showEsicPage = 0;
+let showMinWagePage = 0;
+let showLwfPage = 0;
+
 indexRouter.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", {
+    showPtTaxPage,
+    sData,
+    bonusData,
+    showBonusInputPage,
+    showEsicPage,
+    esicContri,
+  });
+  showPtTaxPage = 0;
+  showBonusInputPage = 0;
+  showEsicPage = 0;
 });
 
 indexRouter.post("/", (req, res) => {
   const pages = Object.keys(req.body);
-  if (pages.includes("Pttax")) {
+  if (pages.includes("reset")) {
+    showPtTaxPage = 0;
+    showBonusInputPage = 0;
+    showEsicPage = 0;
+    showLwfPage = 0;
+    showMinWagePage = 0;
+  } else {
+    if (pages.includes("PtTax")) {
+      showPtTaxPage = 1;
+    }
+    if (pages.includes("bonusinput")) {
+      showBonusInputPage = 1;
+    }
+    if (pages.includes("esic")) {
+      showEsicPage = 1;
+    }
+    if (pages.includes("minimumwage")) {
+      showMinWagePage = 1;
+    }
+    if (pages.includes("lwf")) {
+      showLwfPage = 1;
+    }
   }
   res.redirect(301, "/");
 });
@@ -70,7 +106,8 @@ indexRouter.post("/inputs", calculatePtTax, async (req, res) => {
 
 //Bonus input Path
 indexRouter.get("/bonusinput", (req, res) => {
-  res.render("bonusinput.ejs", { bonusData });
+  res.redirect(301, "/");
+  // res.render("bonusinput.ejs", { bonusData });
   bonusData = 0;
 });
 
@@ -84,7 +121,8 @@ indexRouter.post("/bonusinput", (req, res) => {
 
 //esic input Path
 indexRouter.get("/esicinput", (req, res) => {
-  res.render("esicinput.ejs", { esicContri });
+  res.redirect(301, "/");
+  // res.render("esicinput.ejs", { esicContri });
   esicContri = 0;
 });
 
@@ -103,6 +141,7 @@ indexRouter.post("/esicinput", (req, res) => {
 
 indexRouter.get("/minimumwage", async (req, res) => {
   const stateList = await States.find({});
+  res.re;
   res.render("MinimumWageAct/stateSelection", { stateList });
 });
 

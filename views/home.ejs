@@ -10,6 +10,10 @@
     <input type="checkbox" name="bonusinput" id="bonusinput" />
     <label for="bonusinput">Bonus</label>
   </div>
+   <div>
+    <input type="checkbox" name="esic" id="esic" />
+    <label for="esic">Esic</label>
+  </div>
   <div>
     <input type="checkbox" name="minimumwage" id="minimumwage" />
     <label for="minimumwage">Minimum Wage</label>
@@ -17,8 +21,8 @@
   <div>
     <input type="checkbox" name="lwf" id="lwf" /> <label for="lwf">Lwf</label>
   </div>
-  <button onclick="submitHandler()">Submit</button>
-  <input type="reset" value="Reset" />
+  <button class="btn btn-success">Submit</button>
+  <button name="reset" class="btn btn-danger">Reset</button><!--this button is name reset so that the form can reset as it name will be passed in req.body-->
 </form>
 
 <!-- <div class="main">
@@ -32,3 +36,129 @@
   >
   <a href="/lwf"><button class="btn btn-primary">LWF</button></a>
 </div> -->
+
+<!-------------------------------------- Pages to show option------------------------------------------------------------- -->
+<%if(locals.showPtTaxPage!=0){%>
+<form action="/inputs" method="POST">
+  <h1 align="center">PtInputs</h1>
+  <div class="main">
+    <div class="PTinputs">
+      <select name="state">
+        <option value="" selected disabled>Select state</option>
+        <option value="AndraPradesh">Andra Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Gujrat">Gujrat</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerela">Kerela</option>
+        <option value="MadhyaPradesh">Madhya Pradesh</option>
+        <option value="Maharahstra">Maharahstra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Orissa">Orrisa</option>
+        <option value="Puducherry">Puducherry</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="TamilNadu">TamilNadu</option>
+        <option value="Telenagana">Telenagana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="WestBengal">West Bengal</option>
+      </select>
+    </div>
+    <div class="salary">
+      <select name="salarytype">
+        <option value="" selected disabled>Salary</option>
+        <option value="annual">Annual</option>
+        <option value="monthly">monthly</option>
+      </select>
+      <div>
+        <div class="gender">
+      <select name="gender">
+        <option value="" selected disabled>gender</option>
+        <option value="m">Male</option>
+        <option value="f">Female</option>
+      </select>
+      <div>
+        <label for="salary">Enter salary</label>
+        <input type="text" name="salary" id="salary" required />
+      </div>
+    </div>
+  </div>
+</form>
+  <button class="btn btn-success">Submit</button>
+<a href="/"><button class="btn btn-danger">Back</button></a>
+
+<div>
+<%if(locals.sData!=0){%>
+<div>
+  <div><p>Amount to be deducted: <%= sData.tax %></p></div>
+  <div><p>Frequency Of deduction : <%= sData.frequency %></p></div>
+  <div><p>Due Date of Filing : <%= sData.dueDate %></p></div>
+  <div>
+    Official Website Link
+    <a href="<%= sData.Website %>"><%= sData.Website %></a>
+  </div>
+</div>
+<%}%>
+</div>
+<%}%>
+
+
+<!----------------------------------------------------Bonus I/O Section--------------------------------------------------------->
+<div>
+<%if(locals.showBonusInputPage!=0){%>
+<form action="/bonusinput" method="POST">
+  <div class="mb-3" style="width: 20%">
+    <label for="basicSalary" class="form-label">Enter Basic Salary</label>
+    <input
+      type="text"
+      class="form-control"
+      id="basicSalary"
+      name="basicSalary"
+      aria-describedby="basicSalary"
+      required
+    />
+  </div>
+  <button class="btn btn-success">Submit</button>
+</form>
+
+<a href="/"><button class="btn btn-danger">Back</button></a>
+
+<div>
+  <%if(locals.bonusData){%>
+  <div>Output</div>
+  <div><p>Bonus is <%-bonusData%></p></div>
+  <%}%>
+</div>
+<%}%>
+</div>
+
+<!----------------------------------------Esic Section-------------------------------------------------------------------------->
+<%if(locals.showEsicPage){%>
+<form action="/esicinput" method="POST">
+  <div class="mb-3" style="width: 20%">
+    <label for="esic" class="form-label">Enter Gross Salary</label>
+    <input
+      type="text"
+      class="form-control"
+      id="esic"
+      name="grossSalary"
+      aria-describedby="esic"
+      required
+    />
+  </div>
+  <button class="btn btn-success">Submit</button>
+</form>
+
+<a href="/"><button class="btn btn-danger">Back</button></a>
+<%if(locals.esicContri!=0){%>
+<div>
+  <div><P>Esic Contribution</P></div>
+  <div><p>Employee Contribution is : <%-esicContri.employee%></p></div>
+  <div><p>Employer Contribution is : <%-esicContri.employer%></p></div>
+</div>
+<%}%>
+<%}%>
+
+
+<!-------------------------------------minimum wage section---------------------------------------------------------------------->
