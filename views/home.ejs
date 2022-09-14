@@ -1,21 +1,27 @@
 <%-include('layout/boilerplate.ejs') %>
-<style>
-  .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 20vh;
-  }
-  h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-  }
-</style>
+
 <h1>Welcome</h1>
-<div class="main">
+<form action="/" method="post">
+  <div>
+    <input type="checkbox" name="PtTax" id="PtTax" />
+    <label for="PtTax"></label>PT
+  </div>
+  <div>
+    <input type="checkbox" name="bonusinput" id="bonusinput" />
+    <label for="bonusinput">Bonus</label>
+  </div>
+  <div>
+    <input type="checkbox" name="minimumwage" id="minimumwage" />
+    <label for="minimumwage">Minimum Wage</label>
+  </div>
+  <div>
+    <input type="checkbox" name="lwf" id="lwf" /> <label for="lwf">Lwf</label>
+  </div>
+  <button onclick="submitHandler()">Submit</button>
+  <input type="reset" value="Reset" />
+</form>
+
+<!-- <div class="main">
   <a href="/inputs"><button class="btn btn-primary">PtTax</button></a>
   <a href="/bonusinput"
     ><button class="btn btn-primary">Statutory Bonus</button></a
@@ -25,4 +31,4 @@
     ><button class="btn btn-primary">Minimum Wage Act</button></a
   >
   <a href="/lwf"><button class="btn btn-primary">LWF</button></a>
-</div>
+</div> -->

@@ -41,8 +41,17 @@ let sName = 0; //statename
 let g_Salary = 0; //gross_salary
 let emp_Count = 0; //employee_count
 
+//locals for showing pages
+let showPtTaxPage = 0;
 indexRouter.get("/", (req, res) => {
   res.render("home");
+});
+
+indexRouter.post("/", (req, res) => {
+  const pages = Object.keys(req.body);
+  if (pages.includes("Pttax")) {
+  }
+  res.redirect(301, "/");
 });
 
 indexRouter.get("/inputs", (req, res) => {
