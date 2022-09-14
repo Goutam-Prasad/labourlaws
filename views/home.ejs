@@ -39,8 +39,9 @@
 </div> -->
 
 <!-------------------------------------- Pages to show option------------------------------------------------------------- -->
-<%if(locals.showPtTaxPage!=0){%>
 <form action="/outputs" method="POST">
+<%if(locals.showPtTaxPage!=0){%>
+
   <h1 align="center">PtInputs</h1>
   <div class="main">
     <div class="PTinputs">
@@ -102,7 +103,6 @@
   <%}%>
 
   <!----------------------------------------------------Bonus I/O Section--------------------------------------------------------->
-  <div>
     <%if(locals.showBonusInputPage!=0){%>
     <h1 align="center">Bonus Input</h1>
     <div class="mb-3" style="width: 20%">
@@ -115,7 +115,7 @@
         aria-describedby="basicSalary"
         required
       />
-    </div>
+    
 
     <div>
       <%if(locals.bonusData){%>
@@ -141,8 +141,6 @@
     />
   </div>
 
-  <a href="/"><button class="btn btn-danger">Back</button></a>
-  <div></div>
   <%if(locals.esicContri!=0){%>
   <div>
     <div><P>Esic Contribution</P></div>
@@ -152,7 +150,7 @@
   <%}%>
   </div>
    <%}%>
-  <button class="btn btn-success">Submit</button>
+   <button class="btn btn-success">Submit</button>
 </form>
 
 <!-------------------------------------minimum wage section---------------------------------------------------------------------->
