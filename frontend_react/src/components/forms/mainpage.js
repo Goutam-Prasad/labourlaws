@@ -10,6 +10,7 @@ import PTResult from "./pttax/pttaxresult";
 import EsicResultData from "./esic/esicresult";
 import BonusResult from "./bonus/bonussResult";
 import LwfResultData from "./lwf/lwfresult";
+import { baseUrl } from "../../api/baseurl";
 
 const MainForm = () => {
   const [ptpageshow, setptpageshow] = useState(false);
@@ -110,7 +111,7 @@ const MainForm = () => {
     try {
       console.log("Statename,option", statename, options);
       const res = await axios.post(
-        `http://localhost:5000/minimumwage/${statename}/result`,
+        `${baseUrl}/minimumwage/${statename}/result`,
         { statename: statename, option: options }
       );
       // console.log(res);
@@ -122,7 +123,7 @@ const MainForm = () => {
 
   const getptTaxResult = async ({ state, gender, salaryType, salary }) => {
     try {
-      const res = await axios.post("http://localhost:5000/ptinputs", {
+      const res = await axios.post(`${baseUrl}/ptinputs`, {
         state: state,
         gender: gender,
         salaryType: salaryType,
@@ -139,7 +140,7 @@ const MainForm = () => {
     employee_count,
   }) => {
     try {
-      const res = await axios.post(`http://localhost:5000/lwf/${state}`, {
+      const res = await axios.post(`${baseUrl}/lwf/${state}`, {
         gross_salary: gross_salary,
         employment_class: employment_class,
         employee_count: employee_count,
@@ -153,7 +154,7 @@ const MainForm = () => {
   const getBonusResult = async ({ basicSalary }) => {
     try {
       console.log("bonus salary", basicSalary);
-      const res = await axios.post("http://localhost:5000/bonusinput/result", {
+      const res = await axios.post(`${baseUrl}/bonusinput/result`, {
         basicSalary: basicSalary,
       });
 

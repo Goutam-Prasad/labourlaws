@@ -94,7 +94,6 @@ const LwfPage = (props) => {
 
   return (
     <div>
-      <h2>Lwf Section</h2>
       {isLoading && (
         <div>
           <p>Loading</p>
