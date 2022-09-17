@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { baseUrl } from "../../../api/baseurl";
 
 const PtTaxForm = (props) => {
   // //(props);
@@ -10,7 +11,7 @@ const PtTaxForm = (props) => {
 
   const getList = async () => {
     setisLoading(true);
-    const result = await axios.get("http://localhost:5000/getStateList");
+    const result = await axios.get(`${baseUrl}/getStateList`);
     // //(result.data);
     setisLoading(false);
     setStateList(result.data);

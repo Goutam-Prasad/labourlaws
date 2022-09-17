@@ -167,7 +167,7 @@ const MainForm = () => {
   const getEsicResult = async ({ grossSalary }) => {
     try {
       console.log("bonus salary", grossSalary);
-      const res = await axios.post("http://localhost:5000/esicinput/output", {
+      const res = await axios.post(`${baseUrl}/esicinput/output`, {
         grossSalary: grossSalary,
       });
 

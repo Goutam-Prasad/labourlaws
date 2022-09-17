@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
+import { baseUrl } from "../../../api/baseurl";
 
 const MinWagePage = (props) => {
   const [StateList, setStateList] = useState([]);
@@ -10,7 +11,7 @@ const MinWagePage = (props) => {
 
   const getList = async () => {
     setisLoading(true);
-    const result = await axios.get("http://localhost:5000/getStateList");
+    const result = await axios.get(`${baseUrl}/getStateList`);
     setisLoading(false);
     setStateList(result.data);
   };
@@ -34,7 +35,7 @@ const MinWagePage = (props) => {
       }
       setisLoading(true);
       axios
-        .get(`http://localhost:5000/minimumwage/${stateName}`)
+        .get(`${baseUrl}/minimumwage/${stateName}`)
         .then((response) => {
           setisLoading(false);
           // //(response.data);
