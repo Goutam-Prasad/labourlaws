@@ -1,6 +1,8 @@
-exports.PtTax = function (stateCode, salary, gender) {
+exports.PtTax = function (stateCode, sal, gender) {
+  //("function called");
   let pttax = "Nil";
-  if (stateCode == "AndraPradesh") {
+  const salary = parseInt(sal);
+  if (stateCode == "AndhraPradesh") {
     if (salary > 20000) pttax = 200;
     else if (salary > 15000 && salary <= 20000) pttax = 150;
     else pttax = "Nil";
