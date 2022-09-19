@@ -27,82 +27,85 @@ const MainForm = () => {
 
   const clickHandler = (event) => {
     const name = event.target.name;
-
-    if (name === "PtTax") {
-      if (ptpageshow === false) {
-        setptpageshow(true);
-        setrequestData({ ...requestData, ptTax: {} });
-      } else {
-        if ("ptTax" in requestData) {
-          // const updatedData=Object.assign({},requestData);
-          const updatedData = { ...requestData };
-          delete updatedData.ptTax;
-          setrequestData(updatedData);
+    try {
+      if (name === "PtTax") {
+        if (ptpageshow === false) {
+          setptpageshow(true);
+          setrequestData({ ...requestData, ptTax: {} });
+        } else {
+          if ("ptTax" in requestData) {
+            // const updatedData=Object.assign({},requestData);
+            const updatedData = { ...requestData };
+            delete updatedData.ptTax;
+            setrequestData(updatedData);
+          }
+          setptpageshow(false);
+          setPtResult(false);
         }
-        setptpageshow(false);
-        setPtResult(false);
       }
-    }
 
-    if (name === "bonus") {
-      if (showbonuspage === false) {
-        setrequestData({ ...requestData, bonus: {} });
-        setshowbonuspage(true);
-      } else {
-        if ("bonus" in requestData) {
-          const updatedData = { ...requestData };
-          delete updatedData.bonus;
-          setrequestData(updatedData);
+      if (name === "bonus") {
+        if (showbonuspage === false) {
+          setrequestData({ ...requestData, bonus: {} });
+          setshowbonuspage(true);
+        } else {
+          if ("bonus" in requestData) {
+            const updatedData = { ...requestData };
+            delete updatedData.bonus;
+            setrequestData(updatedData);
+          }
+          setBonusResultData(false);
+          setshowbonuspage(false);
         }
-        setBonusResultData(false);
-        setshowbonuspage(false);
       }
-    }
 
-    if (name === "esic") {
-      if (showesicpage === false) {
-        setrequestData({ ...requestData, esic: {} });
-        setshowesicpage(true);
-      } else {
-        if ("esic" in requestData) {
-          const updatedData = { ...requestData };
-          delete updatedData.esic;
-          setrequestData(updatedData);
+      if (name === "esic") {
+        if (showesicpage === false) {
+          setrequestData({ ...requestData, esic: {} });
+          setshowesicpage(true);
+        } else {
+          if ("esic" in requestData) {
+            const updatedData = { ...requestData };
+            delete updatedData.esic;
+            setrequestData(updatedData);
+          }
+          setshowesicpage(false);
+          setEsicResult(false);
         }
-        setshowesicpage(false);
-        setEsicResult(false);
       }
-    }
 
-    if (name === "minwage") {
-      if (showminwagepage === false) {
-        setshowminwagepage(true);
-        setrequestData({ ...requestData, minwage: {} });
-      } else {
-        if ("minawge" in requestData) {
-          const updatedData = { ...requestData };
-          delete updatedData.minwage;
-          setrequestData(updatedData);
+      if (name === "minwage") {
+        if (showminwagepage === false) {
+          setshowminwagepage(true);
+          setrequestData({ ...requestData, minwage: {} });
+        } else {
+          if ("minawge" in requestData) {
+            const updatedData = { ...requestData };
+            delete updatedData.minwage;
+            setrequestData(updatedData);
+          }
+          setshowminwagepage(false);
+          setWageResult(false);
         }
-        setshowminwagepage(false);
-        setWageResult(false);
       }
-    }
 
-    if (name === "lwf") {
-      if (showlwfpage === false) {
-        setshowlwfpage(true);
-        setrequestData({ ...requestData, lwf: {} });
-      } else {
-        if ("lwf" in requestData) {
-          const updatedData = { ...requestData };
-          delete updatedData.lwf;
-          setrequestData(updatedData);
+      if (name === "lwf") {
+        if (showlwfpage === false) {
+          setshowlwfpage(true);
+          setrequestData({ ...requestData, lwf: {} });
+        } else {
+          if ("lwf" in requestData) {
+            const updatedData = { ...requestData };
+            delete updatedData.lwf;
+            setrequestData(updatedData);
+          }
+
+          setshowlwfpage(false);
+          setLwfResult(false);
         }
-
-        setshowlwfpage(false);
-        setLwfResult(false);
       }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -130,7 +133,9 @@ const MainForm = () => {
         salary: salary,
       });
       return res.data;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getLwfResult = async ({

@@ -144,23 +144,27 @@ indexRouter.get("/getstatelist", async (req, res) => {
 });
 
 indexRouter.post("/ptinputs", async (req, res) => {
-  // showPtTaxPage = 1;
-  const selectedState = await PtInput.find({ state: req.body.state });
-  let { state, salary, gender } = req.body;
-  const tax = PtTax(state, salary, gender);
-  //("tax is", tax);
-  //(selectedState);
-  const stateData = selectedState[0];
-  const result = { ...stateData, tax: tax };
-  //("bf adding tax key ", stateData);
-  const finaldata = { ...result._doc, tax: tax };
-  //("final data", finaldata);
-  delete finaldata._id;
-  delete finaldata.__v;
-  // const result = Object.assign({}, { ...stateData, tax: tax });
-  res.json(finaldata);
-  // res.redirect(301, "/");
-  // res.render("results", { stateData });
+  try {
+    // showPtTaxPage = 1;
+    const selectedState = await PtInput.find({ state: req.body.state });
+    let { state, salary, gender } = req.body;
+    const tax = PtTax(state, salary, gender);
+    //("tax is", tax);
+    //(selectedState);
+    const stateData = selectedState[0];
+    const result = { ...stateData, tax: tax };
+    //("bf adding tax key ", stateData);
+    const finaldata = { ...result._doc, tax: tax };
+    //("final data", finaldata);
+    delete finaldata._id;
+    delete finaldata.__v;
+    // const result = Object.assign({}, { ...stateData, tax: tax });
+    res.json(finaldata);
+    // res.redirect(301, "/");
+    // res.render("results", { stateData });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 //Bonus input Path
@@ -171,15 +175,19 @@ indexRouter.get("/bonusinput", (req, res) => {
 });
 
 indexRouter.post("/bonusinput/result", (req, res) => {
-  //(req.body);
-  const { basicSalary } = req.body;
-  const bonus = (8.33 / 100) * parseInt(basicSalary);
-  bonusData = bonus;
-  showBonusInputPage = 1;
-  //(bonus);
-  res.json(bonus);
-  // res.redirect(301, "/");
-  //res.render("bonusoutput.ejs", { bonus });
+  try {
+    //(req.body);
+    const { basicSalary } = req.body;
+    const bonus = (8.33 / 100) * parseInt(basicSalary);
+    bonusData = bonus;
+    showBonusInputPage = 1;
+    //(bonus);
+    res.json(bonus);
+    // res.redirect(301, "/");
+    //res.render("bonusoutput.ejs", { bonus });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 //esic input Path
@@ -190,19 +198,23 @@ indexRouter.get("/esicinput", (req, res) => {
 });
 
 indexRouter.post("/esicinput/output", (req, res) => {
-  const { grossSalary } = req.body;
-  const esicContribution = {
-    employeeContribution: parseFloat(
-      (0.75 / 100) * parseInt(grossSalary)
-    ).toFixed(2),
-    employerContribution: parseFloat(
-      (3.25 / 100) * parseInt(grossSalary)
-    ).toFixed(2),
-  };
-  esicContri = esicContribution;
-  res.json(esicContribution);
-  // res.redirect(301, "/esicinput");
-  //res.render("esicoutput", { esicContribution });
+  try {
+    const { grossSalary } = req.body;
+    const esicContribution = {
+      employeeContribution: parseFloat(
+        (0.75 / 100) * parseInt(grossSalary)
+      ).toFixed(2),
+      employerContribution: parseFloat(
+        (3.25 / 100) * parseInt(grossSalary)
+      ).toFixed(2),
+    };
+    esicContri = esicContribution;
+    res.json(esicContribution);
+    // res.redirect(301, "/esicinput");
+    //res.render("esicoutput", { esicContribution });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 //Minimum Wage Routes
@@ -237,31 +249,35 @@ indexRouter.get("/lwf/:statename", async (req, res) => {
 });
 
 indexRouter.post("/lwf/:statename", async (req, res) => {
-  // const { statename } = req.params;
-  const { gross_salary, employment_class, employee_count, state } = req.body;
-  const result = await getDataFromLwf(state);
-  const contribution = await getContributionInLWF(
-    state,
-    gross_salary,
-    employment_class,
-    employee_count
-  );
-  result["Your Contribution"] = contribution[0];
-  result["Your Employer Contribution"] = contribution[1];
-  //(result);
-  res.json(result);
-  // lwfResult = result; //only used or data passing
-  // sName = statename; //only used or data passing
-  // g_Salary = gross_salary; //only used or data passing
-  // emp_Count = employee_count; //only used or data passing
-  // // res.render("lwf/lwfoutput.ejs", {
-  //   result,
-  //   statename,
-  //   gross_salary,
-  //   employee_count,
-  // });
+  try {
+    // const { statename } = req.params;
+    const { gross_salary, employment_class, employee_count, state } = req.body;
+    const result = await getDataFromLwf(state);
+    const contribution = await getContributionInLWF(
+      state,
+      gross_salary,
+      employment_class,
+      employee_count
+    );
+    result["Your Contribution"] = contribution[0];
+    result["Your Employer Contribution"] = contribution[1];
+    //(result);
+    res.json(result);
+    // lwfResult = result; //only used or data passing
+    // sName = statename; //only used or data passing
+    // g_Salary = gross_salary; //only used or data passing
+    // emp_Count = employee_count; //only used or data passing
+    // // res.render("lwf/lwfoutput.ejs", {
+    //   result,
+    //   statename,
+    //   gross_salary,
+    //   employee_count,
+    // });
 
-  //res.redirect(301, `/lwf/${statename}`);
+    //res.redirect(301, `/lwf/${statename}`);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 indexRouter.get("/minimumwage/:statename", async (req, res) => {
@@ -281,15 +297,19 @@ indexRouter.get("/minimumwage/:statename", async (req, res) => {
 });
 
 indexRouter.post("/minimumwage/:statename/result", async (req, res) => {
-  const { statename } = req.params;
-  //(req.params);
-  const option = req.body.option;
-  //(option);
-  let result = await sendWageData(statename, option);
-  minwageResult = result;
-  res.json(result);
-  // res.redirect(301, `/minimumwage/${statename}`);
-  //res.render("MinimumWageAct/wageoutput.ejs", { result });
+  try {
+    const { statename } = req.params;
+    //(req.params);
+    const option = req.body.option;
+    //(option);
+    let result = await sendWageData(statename, option);
+    minwageResult = result;
+    res.json(result);
+    // res.redirect(301, `/minimumwage/${statename}`);
+    //res.render("MinimumWageAct/wageoutput.ejs", { result });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = indexRouter;
