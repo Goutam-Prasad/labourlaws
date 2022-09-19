@@ -6,10 +6,20 @@ const PTResult = ({ PtResult }) => {
       {Object.keys(PtResult).map((key, index) => {
         return (
           <div key={index}>
-            <p>
-              <b>{key} :</b>
-              {PtResult[key]}
-            </p>
+            <div>
+              {key === "Website" && (
+                <p>
+                  <b>{key} :</b>
+                  <a href={PtResult[key]}>{PtResult[key]}</a>
+                </p>
+              )}
+              {key !== "Website" && (
+                <p>
+                  <b>{key} :</b>
+                  {PtResult[key]}
+                </p>
+              )}
+            </div>
           </div>
         );
       })}

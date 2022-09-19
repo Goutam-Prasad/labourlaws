@@ -6,10 +6,20 @@ const LwfResultData = ({ LwfResult }) => {
       {Object.keys(LwfResult).map((key, index) => {
         return (
           <div key={index}>
-            <p>
-              <b>{key} :</b>
-              {LwfResult[key]}
-            </p>
+            <div>
+              {key === "Link" && (
+                <p>
+                  <b>{key} :</b>
+                  <a href={LwfResult[key]}>{LwfResult[key]}</a>
+                </p>
+              )}
+              {key !== "Link" && (
+                <p>
+                  <b>{key} :</b>
+                  {LwfResult[key]}
+                </p>
+              )}
+            </div>
           </div>
         );
       })}
