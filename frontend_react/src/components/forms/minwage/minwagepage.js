@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import { baseUrl } from "../../../api/baseurl";
+import LoadingSpinner from "../../common/spinner";
 
 const MinWagePage = (props) => {
   const [StateList, setStateList] = useState([]);
@@ -112,11 +113,7 @@ const MinWagePage = (props) => {
   return (
     <div>
       <div>
-        {isLoading && (
-          <div>
-            <p>Loading</p>
-          </div>
-        )}
+        {isLoading && <LoadingSpinner />}
         {!isLoading && StateList && (
           <Form.Select
             name="state"

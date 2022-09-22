@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import { baseUrl } from "../../../api/baseurl";
+import LoadingSpinner from "../../common/spinner";
 
 const LwfPage = (props) => {
   const [StateList, setStateList] = useState([]);
@@ -95,11 +96,7 @@ const LwfPage = (props) => {
 
   return (
     <div>
-      {isLoading && (
-        <div>
-          <p>Loading</p>
-        </div>
-      )}
+      {isLoading && <LoadingSpinner />}
       {!isLoading && StateList && (
         <Form.Select
           defaultValue={stateName}

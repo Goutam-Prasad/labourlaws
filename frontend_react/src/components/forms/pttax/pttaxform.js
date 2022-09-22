@@ -3,6 +3,7 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { baseUrl } from "../../../api/baseurl";
+import LoadingSpinner from "../../common/spinner";
 
 const PtTaxForm = (props) => {
   // //(props);
@@ -63,7 +64,7 @@ const PtTaxForm = (props) => {
 
   return (
     <div>
-      {isLoading && <p>Loading</p>}
+      {isLoading && <LoadingSpinner />}
       {!isLoading && StateList && (
         <div>
           <Form.Select
