@@ -11,6 +11,7 @@ import EsicResultData from "./esic/esicresult";
 import BonusResult from "./bonus/bonussResult";
 import LwfResultData from "./lwf/lwfresult";
 import { baseUrl } from "../../api/baseurl";
+import Button from "react-bootstrap/Button";
 
 const MainForm = () => {
   const [ptpageshow, setptpageshow] = useState(false);
@@ -156,6 +157,7 @@ const MainForm = () => {
       console.log(err);
     }
   };
+
   const getBonusResult = async ({ basicSalary }) => {
     try {
       console.log("bonus salary", basicSalary);
@@ -169,6 +171,7 @@ const MainForm = () => {
       console.log(error);
     }
   };
+
   const getEsicResult = async ({ grossSalary }) => {
     try {
       console.log("bonus salary", grossSalary);
@@ -182,6 +185,7 @@ const MainForm = () => {
       console.log(error);
     }
   };
+
   const resetHandler = () => {
     setptpageshow(false);
     setshowbonuspage(false);
@@ -192,8 +196,8 @@ const MainForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log(requestData);
+    // console.log(e.target);
+    // console.log(requestData);
     try {
       if (requestData.minwage) {
         console.log(requestData.minwage);
@@ -228,6 +232,9 @@ const MainForm = () => {
         const res = await getLwfResult(requestData.lwf);
         setLwfResult(res);
       }
+      if (Object.keys(requestData).length === 0) {
+        window.alert("Please select something");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -238,9 +245,11 @@ const MainForm = () => {
       name="mainform"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      <div style={{ display: "flex", border: "7px solid black" }}>
+      <div style={{ display: "flex", border: "7px solid white" }}>
         <input type="checkbox" name="PtTax" id="PtTax" onClick={clickHandler} />
-        <label htmlFor="PtTax">PtTax</label>
+        <label htmlFor="PtTax">
+          <b>PtTax</b>
+        </label>
         {ptpageshow && (
           <PtTaxForm
             setrequestData={setrequestData}
@@ -250,9 +259,11 @@ const MainForm = () => {
         {ptpageshow && PtResult && <PTResult PtResult={PtResult} />}
       </div>
       {/**______________________________________________BONUSPAGE______________________________________ */}
-      <div style={{ display: "flex", border: "7px solid black" }}>
+      <div style={{ display: "flex", border: "7px solid white" }}>
         <input type="checkbox" name="bonus" id="bonus" onClick={clickHandler} />
-        <label htmlFor="bonus">Bonus</label>
+        <label htmlFor="bonus">
+          <b>Bonus</b>
+        </label>
         {showbonuspage && (
           <BonusPage
             requestData={requestData}
@@ -265,9 +276,11 @@ const MainForm = () => {
       </div>
 
       {/**______________________________________________________________ESIC_________________________________________ */}
-      <div style={{ display: "flex", border: "7px solid black" }}>
+      <div style={{ display: "flex", border: "7px solid white" }}>
         <input type="checkbox" name="esic" id="esic" onClick={clickHandler} />
-        <label htmlFor="esic">Esic</label>
+        <label htmlFor="esic">
+          <b>Esic</b>
+        </label>
         {showesicpage && (
           <EsicPage setrequestData={setrequestData} requestData={requestData} />
         )}
@@ -277,14 +290,16 @@ const MainForm = () => {
       </div>
 
       {/**_____________________________---------MinWAge ______________________________________________________________________________ */}
-      <div style={{ display: "flex", border: "7px solid black" }}>
+      <div style={{ display: "flex", border: "7px solid white" }}>
         <input
           type="checkbox"
           name="minwage"
           id="minwage"
           onClick={clickHandler}
         />
-        <label htmlFor="minwage">Min Wage Act</label>
+        <label htmlFor="minwage">
+          <b> Min Wage Act</b>
+        </label>
         {showminwagepage && (
           <MinWagePage
             requestData={requestData}
@@ -298,16 +313,24 @@ const MainForm = () => {
       </div>
 
       {/** -----------------------------------Lwf----------------------------------------------- */}
-      <div style={{ display: "flex", border: "7px solid black" }}>
+      <div style={{ display: "flex", border: "7px solid white" }}>
         <input type="checkbox" name="lwf" id="lwf" onClick={clickHandler} />
-        <label htmlFor="lwf">LWF</label>
+        <label htmlFor="lwf">
+          <b>LWF</b>
+        </label>
         {showlwfpage && (
           <LwfPage requestData={requestData} setrequestData={setrequestData} />
         )}
         {showlwfpage && LwfResult && <LwfResultData LwfResult={LwfResult} />}
       </div>
-      <input type="submit" value="Submit" />
-      <input type="reset" value="Reset" onClick={resetHandler} />
+      <div>
+        <Button variant="success" type="submit">
+          Submit
+        </Button>
+        <Button variant="danger" type="reset" onClick={resetHandler}>
+          Reset
+        </Button>
+      </div>
     </form>
   );
 };
