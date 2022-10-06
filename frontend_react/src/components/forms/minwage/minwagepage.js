@@ -45,9 +45,11 @@ const MinWagePage = (props) => {
         })
         .catch((err) => {
           //(err);
+          console.log(err.message);
         });
     } catch (error) {
       //(error);
+      console.log(error.message);
     }
   };
 

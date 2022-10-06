@@ -47,13 +47,12 @@ const LwfPage = (props) => {
             window.alert("Rules Not Applicable for this state");
             setshowOptions([]);
           }
-          // setshowDetails(JSON.stringify(response.data));
         })
         .catch((err) => {
-          //(err);
+          console.log(err.message);
         });
     } catch (error) {
-      //(error);
+      console.log(error.message);
     }
   };
 
@@ -87,6 +86,7 @@ const LwfPage = (props) => {
       props.setrequestData(Object.assign({}, updatedData));
     } catch (err) {
       //(err);
+      console.log(err.message);
     }
   };
 
